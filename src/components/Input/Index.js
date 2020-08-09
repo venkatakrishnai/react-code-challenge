@@ -1,6 +1,7 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useEffect } from "react";
 import classNames from "classnames";
 import { textInputProps } from "./util";
+import $ from "jquery";
 
 const Index = forwardRef(
   (
@@ -25,20 +26,22 @@ const Index = forwardRef(
       name,
       value,
       autoComplete,
-      showCount,
       ...other
     },
     ref
   ) => {
-    const [inputCount, setInputCount] = useState(0);
-
+    useEffect(() => {
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    }, []);
     const errorId = id + "-error-msg";
     const textInputClasses = classNames(
-      `form-input rounded block w-full h-12`,
+      `form-control rounded d-block w-100`,
       className,
       {
-        [`border-1 border-black-4 bg-white-100`]: !invalid,
-        [`bg-error-light border-1 border-error`]: invalid
+        [`border border-dark bg-white`]: !invalid,
+        [`bg-light border border-danger`]: invalid
       }
     );
     const sharedTextInputProps = {
@@ -47,20 +50,18 @@ const Index = forwardRef(
       autoComplete,
       name,
       onChange: evt => {
-        setInputCount(evt.target.value.length);
-
         if (onChange) {
-          onChange(evt);
+          onChange(evt.target.value);
         }
       },
       onClick: evt => {
         if (!other.disabled) {
-          onClick(evt);
+          onClick(evt.target.value);
         }
       },
       onBlur: evt => {
         if (onBlur) {
-          onBlur(evt);
+          onBlur(evt.target.value);
         }
       },
       placeholder,
@@ -70,22 +71,46 @@ const Index = forwardRef(
       className: inputStyles ? inputStyles : textInputClasses,
       ...other
     };
-    const labelClasses = classNames(`text-sm leading-6 font-medium`, {
-      [`hidden`]: hideLabel
+    const labelClasses = classNames(`text-sm font-weight-bold m-0`, {
+      [`d-none`]: hideLabel
     });
 
     const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-
-    const helpertext = helperText ? (
-      <div className="text-sm leading-5 text-black-5 mt-1">{helperText}</div>
+      <div>
+        <label
+          htmlFor={id}
+          className={labelClasses}
+          style={{ fontSize: ".7rem" }}
+        >
+          {labelText}
+        </label>
+        <span
+          className="pl-2"
+          data-toggle="tooltip"
+          data-placement="top"
+          title={other.tooltipText ? other.tooltipText : labelText}
+        >
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 16 16"
+            className="bi bi-info-circle"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
+            <circle cx="8" cy="4.5" r="1" />
+          </svg>
+        </span>
+      </div>
     ) : null;
 
     const error = invalid ? (
-      <div className={`text-error text-sm leading-normal mt-1`} id={errorId}>
+      <div className={`text-danger text-sm mt-1`} id={errorId}>
         {invalidText}
       </div>
     ) : null;
@@ -95,17 +120,16 @@ const Index = forwardRef(
     );
 
     return (
-      <div>
+      <>
         {label}
-        {helpertext}
         <div
           data-invalid={invalid || null}
-          className="relative rounded-md shadow-sm mt-1"
+          className="relative rounded mt-1 w-100"
         >
           {input}
         </div>
         {error}
-      </div>
+      </>
     );
   }
 );
