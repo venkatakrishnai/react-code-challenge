@@ -87,7 +87,7 @@ function RecoveryPeriod({ setFileds }) {
 								setFileds({ ...fileds, recovery_period });
 							}}
 							value={recoveryPeriod}
-							data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
+							prefix={false}
 						/>
 					</div>
 				</div>

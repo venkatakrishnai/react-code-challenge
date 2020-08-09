@@ -3,14 +3,7 @@ import Input from "../components/Input/Index";
 import { shallowEqual, useSelector } from "react-redux";
 
 function Form({ setFileds }) {
-	useEffect(() => {
-		window.$(document).ready(function() {
-			console.log("ssss", window.$("#replacement_income"));
-			window.$("#replacement_income").inputmask();
-
-			//window.Inputmask().mask(document.querySelectorAll("input"));
-		});
-	}, []);
+	useEffect(() => {}, []);
 	const { fileds } = useSelector(
 		({ insuranceCalculator }) => ({
 			fileds: insuranceCalculator.fileds
@@ -77,7 +70,7 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, replacement_amount });
 					}}
 					value={replacementAmount}
-					data-inputmask="'mask': '99-9999999'"
+					postfix="/month"
 				/>
 			</div>
 
@@ -120,6 +113,7 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, homecare_expenses });
 					}}
 					value={homecareExpenses}
+					postfix="/month"
 				/>
 			</div>
 
@@ -134,6 +128,7 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, other_expenses });
 					}}
 					value={otherExpenses}
+					postfix="/month"
 				/>
 			</div>
 		</div>
