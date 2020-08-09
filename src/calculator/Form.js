@@ -48,7 +48,7 @@ function Form({ setFileds }) {
 			setHealthcareExpenses();
 			setModificationExpenses();
 			setHomecareExpenses();
-			setHomecareExpenses();
+			setOtherExpenses();
 		}
 	};
 
