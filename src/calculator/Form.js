@@ -3,6 +3,14 @@ import Input from "../components/Input/Index";
 import { shallowEqual, useSelector } from "react-redux";
 
 function Form({ setFileds }) {
+	useEffect(() => {
+		window.$(document).ready(function() {
+			console.log("ssss", window.$("#replacement_income"));
+			window.$("#replacement_income").inputmask();
+
+			//window.Inputmask().mask(document.querySelectorAll("input"));
+		});
+	}, []);
 	const { fileds } = useSelector(
 		({ insuranceCalculator }) => ({
 			fileds: insuranceCalculator.fileds
@@ -69,7 +77,7 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, replacement_amount });
 					}}
 					value={replacementAmount}
-					data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
+					data-inputmask="'mask': '99-9999999'"
 				/>
 			</div>
 
@@ -84,7 +92,6 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, healthcare_expenses });
 					}}
 					value={healthcareExpenses}
-					data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
 				/>
 			</div>
 
@@ -99,7 +106,6 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, modification_expenses });
 					}}
 					value={modificationExpenses}
-					data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
 				/>
 			</div>
 
@@ -114,7 +120,6 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, homecare_expenses });
 					}}
 					value={homecareExpenses}
-					data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
 				/>
 			</div>
 
@@ -129,7 +134,6 @@ function Form({ setFileds }) {
 						setFileds({ ...fileds, other_expenses });
 					}}
 					value={otherExpenses}
-					data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
 				/>
 			</div>
 		</div>
