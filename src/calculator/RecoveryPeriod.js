@@ -34,8 +34,8 @@ function RecoveryPeriod({ setFileds }) {
 	}, []);
 
 	return (
-		<div className=" col-12">
-			<div className="card" style={{ maxHeight: "15vh" }}>
+		<div className="col-12">
+			<div className="card shadow border-none" style={{ border: "none" }}>
 				<div
 					className="d-md-flex d-sm-block card-body"
 					style={{ justifyContent: "space-evenly" }}

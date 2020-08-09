@@ -18,7 +18,7 @@ function Index({ setFileds, clearFileds }) {
 					<Form setFileds={setFileds} />
 				</div>
 
-				<div className="col-md-8 col-sm-12">
+				<div className="col-md-8 col-sm-12 pt-2">
 					<RecoveryPeriod setFileds={setFileds} />
 					<div className="pt-5">
 						<Graph />

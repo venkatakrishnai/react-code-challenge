@@ -7,7 +7,7 @@ const Index = forwardRef(
   (
     {
       labelText,
-      className = `text-black-4`,
+      className,
       id,
       placeholder,
       type,
@@ -40,7 +40,7 @@ const Index = forwardRef(
       `form-control rounded d-block w-100`,
       className,
       {
-        [`border border-dark bg-white`]: !invalid,
+        [`border border-light1 bg-white`]: !invalid,
         [`bg-light border border-danger`]: invalid
       }
     );
@@ -116,7 +116,10 @@ const Index = forwardRef(
     ) : null;
 
     const input = (
-      <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+      <input
+        {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+        style={{ height: "8vh" }}
+      />
     );
 
     return (

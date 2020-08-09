@@ -48,8 +48,8 @@ export function* saga() {
     let ten_years_finace = 0;
 
     //calculate
-    today_finace = yield calculateTodayFinace(state.fileds);
-    ten_years_finace = yield calculateTenYearsFinace(state.fileds);
+    today_finace = Math.round(yield calculateTodayFinace(state.fileds));
+    ten_years_finace = Math.round(yield calculateTenYearsFinace(state.fileds));
 
     yield put(actions.setFinace({ today_finace, ten_years_finace }));
   });

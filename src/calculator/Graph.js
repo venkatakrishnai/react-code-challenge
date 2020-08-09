@@ -84,11 +84,17 @@ function RecoveryPeriod(props) {
 							{
 								ticks: {
 									max:
-										Math.max(...getDataset().datasets[0].data) +
-										getDataset().datasets[0].data[0] / 2,
+										Math.max(...getDataset().datasets[0].data) > 100
+											? Math.max(...getDataset().datasets[0].data) +
+											  getDataset().datasets[0].data[0]
+											: Math.max(...getDataset().datasets[0].data),
 									beginAtZero: true,
 									callback: function(value, index, values) {
-										return "$" + value;
+										if (value > 1000) {
+											return "$" + value / 1000 + "k";
+										} else {
+											return "$" + value;
+										}
 									}
 								}
 							}
